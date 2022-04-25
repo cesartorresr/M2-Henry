@@ -21,6 +21,7 @@ function App() {
       <div>
         <Cards
           cities={data}
+          onClose={() => alert(Cairns.name)}
         />
       </div>
       <hr />
