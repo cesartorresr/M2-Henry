@@ -3,6 +3,11 @@ import React, { useState } from 'react';
 import './App.css';
 import Nav from '../components/Nav.jsx';
 import Cards from '../components/Cards.jsx';
+import About from '../components/About';
+
+import { Route } from 'react-router-dom';
+import Ciudad from '../components/Ciudad.jsx';
+
 
 const apiKey = '4ae2636d8dfbdc3044bede63951a019b';
 
@@ -46,14 +51,26 @@ function App() {
   }
   return (
     <div className="App">
-      <Nav onSearch={onSearch}/>
-      <div>
-        <Cards
-          cities={cities}
-          onClose={onClose}
-        />
-      </div>
-      <hr />
+      <Route
+      path="/"
+      render={ ()=> <Nav onSearch={onSearch}/>}
+      />
+
+      <Route
+      exact path="/"
+      render={()=> <Cards cities={cities} onClose={onClose}
+      />}/>
+        
+      <Route
+      path="/about"
+      component={()=><About/> }
+      />
+
+      <Route
+      path='/ciudad/:ciudadId'
+      render={({match}) => <Ciudad city={onFilter(match.params.ciudadId)}/>}
+      />
+      
     </div>
   );
 }
